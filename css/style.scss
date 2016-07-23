@@ -1,30 +1,7 @@
 @charset "UTF-8";
-* {
-  padding: 0;
-  margin: 0;
-}
-
-body {
-  font-family: '微软雅黑';
-}
-
-li {
-  list-style: none;
-}
-
-a {
-  text-decoration: none;
-}
-
-@mixin transition($transition) {
-  -webkit-transition: $transition;
-  -moz-transition: $transition;
-  -ms-transiton: $transition;
-  -o-transition: $transition;
-  transition: $transition;
-}
-
-$sidebarW: 70px;
+@import "reset";
+@import "common_mixin";
+$sidebarW: 50px;
 $sidebarBg: #242424;
 $sidebarHoverBg:#484848;
 
@@ -33,12 +10,16 @@ $sidebarHoverBg:#484848;
   width: $sidebarW;
   position: fixed;
   bottom: 10px;
-  left: 50%;
-  margin-left: -$sidebarW / 2;
+  left:50%;
+  margin-left: 370px;
 
   li{
     position: relative;
     overflow: visible;
+    margin: 1px 0;
+    display: block;
+
+
 
     &:hover {
       .sidebar-layer {
@@ -47,13 +28,9 @@ $sidebarHoverBg:#484848;
         transform: scale(1);
       }
       .sidebar-btn{
-        //animation:anim 1s   alternate;
         transform: translate(0,-$sidebarW);
       }
-      /*@keyframes anim {
-        0% {margin: 0;}
-        100% {margin-top: -$sidebarW}
-      }*/
+
     }
   }
 }
@@ -67,7 +44,6 @@ $sidebarHoverBg:#484848;
   color: #b9b9c3;
   background-color: $sidebarBg;
   text-align: center;
-  margin: 1px auto;
   transition: all 1s;
   overflow: hidden;
 
@@ -102,8 +78,8 @@ $sidebar-icon-list:home , collect , message , friend , back-top;
   width: $sidebarW;
   height: $sidebarW;
   line-height: 1.2;
-  font-size: 15px;
-  padding-top: 18px;
+  font-size: 13px;
+  padding-top: 12px;
   background-color: $sidebarHoverBg;
 }
 

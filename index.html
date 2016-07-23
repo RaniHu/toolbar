@@ -3,12 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery-1.9.1-min.js"></script>
     <title>侧边栏开发</title>
 </head>
 <body>
+    <div  style="width:709px ; margin: 0 auto">
+        <img src="img/1.jpg">
+        <img src="img/1.jpg">
+        <img src="img/1.jpg">
+        <img src="img/1.jpg">
+    </div>
     <ul class="sidebar">
         <li>
-            <a href="#" class="sidebar-item">
+            <a href="javascript:;" class="sidebar-item">
                 <span class="sidebar-btn">
                     <i class="sidebar-icon home"></i>
                     <span class="sidebar-text">我的<br>首页</span>
@@ -17,7 +24,7 @@
             <span class="sidebar-layer"></span>
         </li>
         <li>
-            <a href="#" class="sidebar-item">
+            <a href="javascript:;" class="sidebar-item">
                 <span class="sidebar-btn">
                     <i class="sidebar-icon collect"></i>
                     <span class="sidebar-text">我的<br>收藏</span>
@@ -26,7 +33,7 @@
             <span class="sidebar-layer"></span>
         </li>
         <li>
-            <a href="#" class="sidebar-item">
+            <a href="javascript:;" class="sidebar-item">
                 <span class="sidebar-btn">
                     <i class="sidebar-icon message"></i>
                     <span class="sidebar-text">我的<br>消息</span>
@@ -35,7 +42,7 @@
             <span class="sidebar-layer"></span>
         </li>
         <li>
-            <a href="#" class="sidebar-item">
+            <a href="javascript:;" class="sidebar-item">
                 <span class="sidebar-btn">
                     <i class="sidebar-icon friend"></i>
                     <span class="sidebar-text">我的<br>朋友</span>
@@ -43,8 +50,8 @@
             </a>
             <span class="sidebar-layer"></span>
         </li>
-        <li>
-            <a href="#" class="sidebar-item">
+        <li  id="back-top" style="display: none">
+            <a href="javascript:;" class="sidebar-item">
                 <span class="sidebar-btn">
                     <i class="sidebar-icon back-top"></i>
                     <span class="sidebar-text">回到<br>顶部</span>
@@ -53,6 +60,42 @@
         </li>
     </ul>
 
+    <script>
+        $(function () {
+            //返回顶部
+            var backTop=$("#back-top");
+            var timer=null;
+            var clientH=$(window).height();                           //浏览器可视高度
+//          var clientH=document.documentElement.clientHeight;        //js浏览器可视高度
+
+            $(window).scroll(function () {
+                var scrollH=$(window).scrollTop();                    //jquery获取滚动条高度
+//              var scrollH=document.body.scrollTop;                  //js获取滚动条高度
+                if (scrollH >clientH) {                               //当滚动高度大于屏幕可视高度时
+                    backTop.slideDown(500)
+                }else{
+                    backTop.slideUp(500)
+
+                }
+            });
+
+            //点击回到顶部按钮
+            backTop.click(function(){
+                //使用jquery匀速回到顶部
+//                $("body").animate({scrollTop:0},400);
+
+                //使用原生js先快后慢回到顶部
+                timer=setInterval(function(){
+                    var disTop= $(window).scrollTop();              //滚动条距离顶部高度
+                    var backSpeed = disTop/5 ;                      //滚动速度
+                    $(window).scrollTop(disTop-backSpeed);
+                    if(disTop == 0){                                  //当滚动到顶部时停止
+                        clearInterval(timer);
+                    }
+                },40)
+            });
+        })
+    </script>
 </body>
 </html>
 
