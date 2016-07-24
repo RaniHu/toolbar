@@ -1,3 +1,7 @@
-# toolbar
-固定工具栏，运用css3动画效果
-http://ranihu.github.io/toolbar/.
+固定工具栏 http://ranihu.github.io/toolbar/.
+
+1.运用css3动画实现鼠标划入后工具栏背景变化的效果
+2.当屏幕滚动超过一屏时出现回到顶部按钮，点击按钮将先快后慢回到顶部
+3.使用sass编写
+
+
