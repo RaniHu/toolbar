@@ -7,95 +7,134 @@
     <title>侧边栏开发</title>
 </head>
 <body>
-    <div  style="width:709px ; margin: 0 auto">
-        <img src="img/1.jpg">
-        <img src="img/1.jpg">
-        <img src="img/1.jpg">
-        <img src="img/1.jpg">
+<div class="header">
+    <img src="img/top-nav.jpg">
+    <!-- 侧边栏菜单-->
+    <div class="menu" style="margin-left: 130px ; float: left">
+        <img src="img/side-menu.jpg">
     </div>
-    <ul class="sidebar">
-        <li>
-            <a href="javascript:;" class="sidebar-item">
+    <!-- 右边主要内容-->
+    <div class="main-content " style="margin-right: 50px ; margin-top: 30px;float: right;">
+        <img src="img/main2.jpg">
+        <img src="img/main3.jpg">
+        <img src="img/main4.jpg">
+        <img src="img/main1.jpg">
+    </div>
+    <div class="clearfix"></div>
+</div>
+<ul class="sidebar">
+    <li class="must-check">
+        <a href="javascript:;" class="sidebar-item">
                 <span class="sidebar-btn">
                     <i class="sidebar-icon home"></i>
-                    <span class="sidebar-text">我的<br>首页</span>
+                    <span class="sidebar-text">每日<br>必看</span>
                 </span>
-            </a>
-            <span class="sidebar-layer"></span>
-        </li>
-        <li>
-            <a href="javascript:;" class="sidebar-item">
+        </a>
+        <span class="sidebar-layer"></span>
+    </li>
+    <li class="test">
+        <a href="javascript:;" class="sidebar-item">
                 <span class="sidebar-btn">
                     <i class="sidebar-icon collect"></i>
-                    <span class="sidebar-text">我的<br>收藏</span>
+                    <span class="sidebar-text">限时<br>特卖</span>
                 </span>
-            </a>
-            <span class="sidebar-layer"></span>
-        </li>
-        <li>
-            <a href="javascript:;" class="sidebar-item">
+        </a>
+        <span class="sidebar-layer"></span>
+    </li>
+    <li class="hot-brand">
+        <a href="javascript:;" class="sidebar-item">
                 <span class="sidebar-btn">
                     <i class="sidebar-icon message"></i>
-                    <span class="sidebar-text">我的<br>消息</span>
+                    <span class="sidebar-text">热门<br>品牌</span>
                 </span>
-            </a>
-            <span class="sidebar-layer"></span>
-        </li>
-        <li>
-            <a href="javascript:;" class="sidebar-item">
-                <span class="sidebar-btn">
-                    <i class="sidebar-icon friend"></i>
-                    <span class="sidebar-text">我的<br>朋友</span>
-                </span>
-            </a>
-            <span class="sidebar-layer"></span>
-        </li>
-        <li  id="back-top" style="display: none">
-            <a href="javascript:;" class="sidebar-item">
+        </a>
+        <span class="sidebar-layer"></span>
+    </li>
+    <!-- <li>
+         <a href="javascript:;" class="sidebar-item">
+             <span class="sidebar-btn">
+                 <i class="sidebar-icon friend"></i>
+                 <span class="sidebar-text">我的<br>朋友</span>
+             </span>
+         </a>
+         <span class="sidebar-layer"></span>
+     </li>-->
+    <li id="back-top" style="display: none">
+        <a href="javascript:;" class="sidebar-item">
                 <span class="sidebar-btn">
                     <i class="sidebar-icon back-top"></i>
                     <span class="sidebar-text">回到<br>顶部</span>
                 </span>
-            </a>
-        </li>
-    </ul>
+        </a>
+    </li>
+</ul>
 
-    <script>
-        $(function () {
-            //返回顶部
-            var backTop=$("#back-top");
-            var timer=null;
-            var clientH=$(window).height();                           //浏览器可视高度
-//          var clientH=document.documentElement.clientHeight;        //js浏览器可视高度
+<div class="footer" style="width: 1314px ; margin: 0 auto">
+    <img src="img/footer.jpg">
+</div>
 
-            $(window).scroll(function () {
-                var scrollH=$(window).scrollTop();                    //jquery获取滚动条高度
-//              var scrollH=document.body.scrollTop;                  //js获取滚动条高度
-                if (scrollH >clientH) {                               //当滚动高度大于屏幕可视高度时
-                    backTop.slideDown(500)
-                }else{
-                    backTop.slideUp(500)
+<script>
+    $(function () {
+        var timer = null;
+        var clientH = $(window).height();                           //jquery获取浏览器可视高度
+        // var clientH=document.documentElement.clientHeight;     //js获取浏览器可视高度
 
+        $(window).scroll(function () {
+            var scrollH = $(window).scrollTop();                    //jquery获取滚动条高度
+            //var scrollH=document.body.scrollTop;                //js获取滚动条高度
+
+            console.log(contentScroll)
+            //返回顶部按钮划入划出
+            if (scrollH > clientH) {                               //当滚动高度大于屏幕可视高度时
+                backTop.slideDown(500)
+            }
+            else {
+                backTop.slideUp(500)
+            }
+
+            //固定侧边菜单栏滚动
+            var contentScroll = $(".main-content").height() - $(".menu").height();    //中间内容滚动高度
+            if (scrollH >= 215 && scrollH <= contentScroll + 215) {
+                $(".menu").css({
+                    "position": "absolute",
+                    "top": scrollH
+                });
+            } else if (scrollH <= 215) {
+                $(".menu").css({
+                    "position": "static"
+                });
+            }
+        });
+
+        //点击回到顶部按钮
+        var backTop = $("#back-top");
+        backTop.click(function () {
+            //使用原生js先快后慢回到顶部
+            timer = setInterval(function () {
+                var disTop = $(window).scrollTop();              //滚动条距离顶部高度
+                var backSpeed = disTop / 6;                       //滚动速度
+                $(window).scrollTop(disTop - backSpeed);
+                if (disTop == 0) {                                //当滚动到顶部时停止
+                    clearInterval(timer);
                 }
-            });
+            }, 40)
+        });
 
-            //点击回到顶部按钮
-            backTop.click(function(){
-                //使用jquery匀速回到顶部
-//                $("body").animate({scrollTop:0},400);
+        //点击固定工具栏滚动
+        //scroll("#back-top",0,600);
+        scroll(".must-check", 224, 400);
+        scroll(".test", 731, 600);
+        scroll(".hot-brand", 1729, 1000)
 
-                //使用原生js先快后慢回到顶部
-                timer=setInterval(function(){
-                    var disTop= $(window).scrollTop();              //滚动条距离顶部高度
-                    var backSpeed = disTop/5 ;                      //滚动速度
-                    $(window).scrollTop(disTop-backSpeed);
-                    if(disTop == 0){                                  //当滚动到顶部时停止
-                        clearInterval(timer);
-                    }
-                },40)
-            });
-        })
-    </script>
+    });
+
+    //使用jquery匀速回到顶部
+    function scroll(obj, scrollTop, speed) {
+        $(obj).click(function () {
+            $("body").animate({scrollTop: scrollTop}, speed);
+        });
+    }
+</script>
 </body>
 </html>
 
