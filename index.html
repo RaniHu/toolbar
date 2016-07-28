@@ -50,15 +50,6 @@
         </a>
         <span class="sidebar-layer"></span>
     </li>
-    <!-- <li>
-         <a href="javascript:;" class="sidebar-item">
-             <span class="sidebar-btn">
-                 <i class="sidebar-icon friend"></i>
-                 <span class="sidebar-text">我的<br>朋友</span>
-             </span>
-         </a>
-         <span class="sidebar-layer"></span>
-     </li>-->
     <li id="back-top" style="display: none">
         <a href="javascript:;" class="sidebar-item">
                 <span class="sidebar-btn">
@@ -83,7 +74,6 @@
             var scrollH = $(window).scrollTop();                    //jquery获取滚动条高度
             //var scrollH=document.body.scrollTop;                //js获取滚动条高度
 
-            console.log(contentScroll)
             //返回顶部按钮划入划出
             if (scrollH > clientH) {                               //当滚动高度大于屏幕可视高度时
                 backTop.slideDown(500)
