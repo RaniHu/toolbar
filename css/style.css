@@ -42,7 +42,7 @@ a {
   position: fixed;
   bottom: 10px;
   left: 50%;
-  margin-left: 370px; }
+  margin-left: 615px; }
   .sidebar li {
     position: relative;
     overflow: visible;
@@ -103,7 +103,7 @@ a {
   height: 50px;
   line-height: 1.2;
   font-size: 13px;
-  padding-top: 12px;
+  padding-top: 11px;
   background-color: #484848; }
 
 /*二维码*/
@@ -120,5 +120,12 @@ a {
   transform: scale(0.01);
   transform-origin: 90% 90%;
   transition: all 0.8s; }
+
+.header {
+  position: relative;
+  width: 1310px;
+  margin: 0 auto; }
+  .header img {
+    display: block; }
 
 /*# sourceMappingURL=style.css.map */
